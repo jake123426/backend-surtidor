@@ -37,10 +37,10 @@ public class UsuarioController {
     @GetMapping("/user/all")
     public ResponseEntity<?> getAllUsers(){
         try {
-            List<Usuario> usuarios = usuarioService.findAll();
-            return new  ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
+            List<ResponseUserDto> usuarios = usuarioService.findAll();
+            return new  ResponseEntity<List<ResponseUserDto>>(usuarios, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<String>(e.getCause().toString(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }

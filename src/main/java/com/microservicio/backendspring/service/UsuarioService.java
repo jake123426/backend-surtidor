@@ -53,11 +53,17 @@ public class UsuarioService {
                 savedUsuario.getPassword(),savedUsuario.getEmail(), roles, permisos);
     }
 
-    public List<Usuario> findAll() {
+    public List<ResponseUserDto> findAll() {
         List<Usuario> usuarios = usuarioRepository.findAll();
         List<ResponseUserDto> usuariosDto = new ArrayList<>();
-        return new ArrayList<>();
-//        return usuarioRepository.findAll();
+        usuarios.forEach( usuario -> {
+            List<String> roles = this.getRoles(usuario);
+            List<String> permisos = this.getPermisos(usuario);
+            ResponseUserDto responseUserDto = new ResponseUserDto(usuario.getId().toString(),
+                    usuario.getName(), usuario.getPassword(), usuario.getEmail(), roles, permisos);
+            usuariosDto.add(responseUserDto);
+        });
+        return usuariosDto;
     }
 
     private List<String> getRoles(Usuario usuario) {

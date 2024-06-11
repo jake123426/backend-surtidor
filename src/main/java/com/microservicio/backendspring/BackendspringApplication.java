@@ -3,9 +3,11 @@ package com.microservicio.backendspring;
 import com.microservicio.backendspring.model.Permisos;
 import com.microservicio.backendspring.model.Roles;
 import com.microservicio.backendspring.model.Usuario;
+import com.microservicio.backendspring.model.Vehiculo;
 import com.microservicio.backendspring.repository.PermissionRepository;
 import com.microservicio.backendspring.repository.RoleRepository;
 import com.microservicio.backendspring.repository.UsuarioRepository;
+import com.microservicio.backendspring.repository.VehiculoRepository;
 import org.bson.types.ObjectId;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,11 +28,13 @@ public class BackendspringApplication {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(UsuarioRepository usuarioRepository, RoleRepository roleRepository, PermissionRepository permissionRepository) {
+	CommandLineRunner commandLineRunner(UsuarioRepository usuarioRepository, RoleRepository roleRepository,
+										PermissionRepository permissionRepository, VehiculoRepository vehiculoRepository) {
 		return args -> {
 			usuarioRepository.deleteAll();
 			permissionRepository.deleteAll();
 			roleRepository.deleteAll();
+			vehiculoRepository.deleteAll();
 
 // *		Agregar Permisos
 			List<Permisos> permisos = Arrays.asList(
@@ -88,6 +92,14 @@ public class BackendspringApplication {
 //			Usuario user = usuarioRepository.findAll().getFirst();
 //			System.out.println(user);
 
+//*			Agregar Vehiculos
+			Vehiculo toyota = Vehiculo.builder().brand("Toyota").model("Vitara").fuel_type("Gasolina")
+					.number_plate("4578-ADC").path_image("image/path").status(1).build();
+			vehiculoRepository.save(toyota);
+
+			Vehiculo suzuki = Vehiculo.builder().brand("Suzuki").model("Jimmy").fuel_type("Diesel")
+					.number_plate("7895-JKA").path_image("image/path").status(1).build();
+			vehiculoRepository.save(suzuki);
 		};
 	}
 
@@ -97,7 +109,6 @@ public class BackendspringApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowCredentials(true)
 						.allowedOrigins("*")
 						.allowedMethods("GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS", "HEAD")
 						.allowedHeaders("Authorization", "Requestor-Type")

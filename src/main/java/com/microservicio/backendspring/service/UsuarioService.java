@@ -54,7 +54,10 @@ public class UsuarioService {
     }
 
     public List<Usuario> findAll() {
-        return usuarioRepository.findAll();
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        List<ResponseUserDto> usuariosDto = new ArrayList<>();
+        return new ArrayList<>();
+//        return usuarioRepository.findAll();
     }
 
     private List<String> getRoles(Usuario usuario) {

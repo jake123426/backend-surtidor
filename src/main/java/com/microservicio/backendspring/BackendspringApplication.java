@@ -13,6 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.*;
 
@@ -86,6 +88,22 @@ public class BackendspringApplication {
 //			Usuario user = usuarioRepository.findAll().getFirst();
 //			System.out.println(user);
 
+		};
+	}
+
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**")
+						.allowCredentials(true)
+						.allowedOrigins("*")
+						.allowedMethods("GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS", "HEAD")
+						.allowedHeaders("Authorization", "Requestor-Type")
+						.exposedHeaders("X-Get-Header");
+
+			}
 		};
 	}
 }

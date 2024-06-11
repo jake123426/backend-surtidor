@@ -37,7 +37,11 @@ public class Usuario {
     @NotNull(message = "El campo status no puede estar vacio")
     private int status;
 
+    @DocumentReference(collection = "pump")
+    private Bomba bomba;
+
     @DocumentReference(collection = "role")
     private List<Roles> roles;
+
 
 }

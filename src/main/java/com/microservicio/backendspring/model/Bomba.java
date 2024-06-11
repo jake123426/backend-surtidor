@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 @Data
 @AllArgsConstructor
@@ -31,5 +32,8 @@ public class Bomba {
 
     @NotNull(message = "El campo estado no puede estar vacio")
     private int status;
+
+    @DocumentReference(collection = "tank")
+    private Tanque tanque;
 
 }

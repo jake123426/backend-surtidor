@@ -70,21 +70,21 @@ public class BackendspringApplication {
 			Roles adminRol = roleRepository.findByName(adminRoles.getFirst()).orElse(null);
             assert adminRol != null;
             Usuario admin = Usuario.builder().name("jaime").email("jaime@correo.com")
-					.password("$2a$10$XXVAn4IhigiuOOiw6ehmn.44bmJdaB7rwlQK.KLdbEu2RVgxeo2GC").status(1).roles(List.of(adminRol)).build();
+					.password("$2a$10$XXVAn4IhigiuOOiw6ehmn.44bmJdaB7rwlQK.KLdbEu2RVgxeo2GC").status(1).bomba(null).roles(List.of(adminRol)).build();
 			usuarioRepository.save(admin);
 
 			List<String> clientRoles = List.of("CLIENT");
 			Roles clientRol = roleRepository.findByName(clientRoles.getFirst()).orElse(null);
 			assert clientRol != null;
 			Usuario client = Usuario.builder().name("rosa").email("rosa@correo.com")
-					.password("$2a$10$XXVAn4IhigiuOOiw6ehmn.44bmJdaB7rwlQK.KLdbEu2RVgxeo2GC").status(1).roles(List.of(clientRol)).build();
+					.password("$2a$10$XXVAn4IhigiuOOiw6ehmn.44bmJdaB7rwlQK.KLdbEu2RVgxeo2GC").status(1).bomba(null).roles(List.of(clientRol)).build();
 			usuarioRepository.save(client);
 
 			List<String> sellerRoles = List.of("SELLER");
 			Roles sellerRol = roleRepository.findByName(sellerRoles.getFirst()).orElse(null);
 			assert sellerRol != null;
 			Usuario seller = Usuario.builder().name("carlos").email("carlos@correo.com")
-					.password("$2a$10$XXVAn4IhigiuOOiw6ehmn.44bmJdaB7rwlQK.KLdbEu2RVgxeo2GC").status(1).roles(List.of(sellerRol)).build();
+					.password("$2a$10$XXVAn4IhigiuOOiw6ehmn.44bmJdaB7rwlQK.KLdbEu2RVgxeo2GC").status(1).bomba(null).roles(List.of(sellerRol)).build();
 			usuarioRepository.save(seller);
 
 //			Usuario user = usuarioRepository.findAll().getFirst();
@@ -100,26 +100,33 @@ public class BackendspringApplication {
 			vehiculoRepository.save(suzuki);
 
 //*			Agregar Combustibles
-			Combustible gasolina = Combustible.builder().name("Gasolina").sale_price(8.45).purchase_price(12.99)
+			Combustible gasolina = Combustible.builder().name("Gasolina").sale_price(8.45).purchase_price(5.99)
 					.mesurement(40).build();
 			fuelRepository.save(gasolina);
 
-			Combustible diesel = Combustible.builder().name("Diesel").sale_price(9.15).purchase_price(15.99)
+			Combustible diesel = Combustible.builder().name("Diesel").sale_price(9.15).purchase_price(8.99)
 					.mesurement(60).build();
 			fuelRepository.save(diesel);
 
+			Combustible gasGlp = Combustible.builder().name("Gas GLP").sale_price(6.5).purchase_price(4.99)
+					.mesurement(100).build();
+			fuelRepository.save(gasGlp);
+
 //*			Agregar Tanques
-			Tanque tanque01 = Tanque.builder().fuel_quantity(100).cap_max(210).cap_min(10).status(1).build();
+			Tanque tanque01 = Tanque.builder().name("Tanque01").fuel_quantity(100).cap_max(210).cap_min(10).status(1).fuel(gasolina).build();
 			tankRepository.save(tanque01);
 
-			Tanque tanque02 = Tanque.builder().fuel_quantity(150).cap_max(250).cap_min(5).status(1).build();
+			Tanque tanque02 = Tanque.builder().name("Tanque02").fuel_quantity(150).cap_max(250).cap_min(5).status(1).fuel(diesel).build();
 			tankRepository.save(tanque02);
 
+			Tanque tanque03 = Tanque.builder().name("Tanque03").fuel_quantity(200).cap_max(300).cap_min(15).status(1).fuel(gasGlp).build();
+			tankRepository.save(tanque03);
+
 //*			Agregar Bombas
-			Bomba bomba01 = Bomba.builder().name("Bomba01").description("45-FD").fuel_type("Gasolina").status(1).build();
+			Bomba bomba01 = Bomba.builder().name("Bomba01").description("45-FD").fuel_type("Gasolina").status(1).tanque(tanque01).build();
 			pumpRepository.save(bomba01);
 
-			Bomba bomba02 = Bomba.builder().name("Bomba02").description("82-QS").fuel_type("Diesel").status(1).build();
+			Bomba bomba02 = Bomba.builder().name("Bomba02").description("82-QS").fuel_type("Diesel").status(1).tanque(tanque02).build();
 			pumpRepository.save(bomba02);
 		};
 	}

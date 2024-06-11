@@ -5,6 +5,7 @@ public record ResponsePumpDto(
         String id,
         String name,
         String description,
-        String fuel_type
+        String fuel_type,
+        String tank
 ) {
 }

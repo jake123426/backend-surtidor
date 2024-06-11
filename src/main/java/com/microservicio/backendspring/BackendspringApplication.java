@@ -1,13 +1,7 @@
 package com.microservicio.backendspring;
 
-import com.microservicio.backendspring.model.Permisos;
-import com.microservicio.backendspring.model.Roles;
-import com.microservicio.backendspring.model.Usuario;
-import com.microservicio.backendspring.model.Vehiculo;
-import com.microservicio.backendspring.repository.PermissionRepository;
-import com.microservicio.backendspring.repository.RoleRepository;
-import com.microservicio.backendspring.repository.UsuarioRepository;
-import com.microservicio.backendspring.repository.VehiculoRepository;
+import com.microservicio.backendspring.model.*;
+import com.microservicio.backendspring.repository.*;
 import org.bson.types.ObjectId;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,12 +23,14 @@ public class BackendspringApplication {
 
 	@Bean
 	CommandLineRunner commandLineRunner(UsuarioRepository usuarioRepository, RoleRepository roleRepository,
-										PermissionRepository permissionRepository, VehiculoRepository vehiculoRepository) {
+										PermissionRepository permissionRepository, VehiculoRepository vehiculoRepository,
+										FuelRepository fuelRepository) {
 		return args -> {
 			usuarioRepository.deleteAll();
 			permissionRepository.deleteAll();
 			roleRepository.deleteAll();
 			vehiculoRepository.deleteAll();
+			fuelRepository.deleteAll();
 
 // *		Agregar Permisos
 			List<Permisos> permisos = Arrays.asList(
@@ -100,6 +96,17 @@ public class BackendspringApplication {
 			Vehiculo suzuki = Vehiculo.builder().brand("Suzuki").model("Jimmy").fuel_type("Diesel")
 					.number_plate("7895-JKA").path_image("image/path").status(1).build();
 			vehiculoRepository.save(suzuki);
+
+//*			Agregar Combustibles
+			Combustible gasolina = Combustible.builder().name("Gasolina").sale_price(8.45).purchase_price(12.99)
+					.mesurement(40).build();
+			fuelRepository.save(gasolina);
+
+			Combustible diesel = Combustible.builder().name("Diesel").sale_price(9.15).purchase_price(15.99)
+					.mesurement(60).build();
+			fuelRepository.save(diesel);
+
+
 		};
 	}
 

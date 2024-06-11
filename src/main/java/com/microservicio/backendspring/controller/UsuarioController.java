@@ -31,16 +31,16 @@ public class UsuarioController {
     @PostMapping("/user")
     public ResponseEntity<?> createUsuario(@RequestBody CreateUserDto usuario){
         ResponseUserDto responseUserDto = usuarioService.create(usuario);
-        return new  ResponseEntity<ResponseUserDto>(responseUserDto, HttpStatus.OK);
+        return new  ResponseEntity<>(responseUserDto, HttpStatus.OK);
     }
 
     @GetMapping("/user/all")
     public ResponseEntity<?> getAllUsers(){
         try {
             List<ResponseUserDto> usuarios = usuarioService.findAll();
-            return new  ResponseEntity<List<ResponseUserDto>>(usuarios, HttpStatus.OK);
+            return new  ResponseEntity<>(usuarios, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }

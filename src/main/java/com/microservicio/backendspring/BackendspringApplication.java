@@ -24,7 +24,7 @@ public class BackendspringApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(UsuarioRepository usuarioRepository, RoleRepository roleRepository,
 										PermissionRepository permissionRepository, VehiculoRepository vehiculoRepository,
-										FuelRepository fuelRepository, TankRepository tankRepository) {
+										FuelRepository fuelRepository, TankRepository tankRepository, PumpRepository pumpRepository) {
 		return args -> {
 			usuarioRepository.deleteAll();
 			permissionRepository.deleteAll();
@@ -32,6 +32,7 @@ public class BackendspringApplication {
 			vehiculoRepository.deleteAll();
 			fuelRepository.deleteAll();
 			tankRepository.deleteAll();
+			pumpRepository.deleteAll();
 
 // *		Agregar Permisos
 			List<Permisos> permisos = Arrays.asList(
@@ -114,6 +115,12 @@ public class BackendspringApplication {
 			Tanque tanque02 = Tanque.builder().fuel_quantity(150).cap_max(250).cap_min(5).status(1).build();
 			tankRepository.save(tanque02);
 
+//*			Agregar Bombas
+			Bomba bomba01 = Bomba.builder().name("Bomba01").description("45-FD").fuel_type("Gasolina").status(1).build();
+			pumpRepository.save(bomba01);
+
+			Bomba bomba02 = Bomba.builder().name("Bomba02").description("82-QS").fuel_type("Diesel").status(1).build();
+			pumpRepository.save(bomba02);
 		};
 	}
 

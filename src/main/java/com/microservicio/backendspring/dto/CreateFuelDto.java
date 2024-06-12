@@ -6,6 +6,6 @@ public record CreateFuelDto(
         @NotBlank String name,
         @NotBlank double sale_price,
         @NotBlank double purchase_price,
-        @NotBlank double mesurement
+        @NotBlank double measurement
 ) {
 }

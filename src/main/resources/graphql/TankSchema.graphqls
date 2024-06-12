@@ -1,0 +1,25 @@
+
+extend type Mutation{
+    saveTank( tankDto : CreateTankDto ): ResponseTankDto
+}
+
+extend type Query {
+    getAllTank: [ResponseTankDto]
+}
+
+type ResponseTankDto{
+    id : String,
+    name : String,
+    fuel_quantity : Float,
+    cap_max : Float,
+    cap_min : Float,
+    fuel : String
+}
+
+input CreateTankDto{
+    name : String
+    fuel_quantity : Float
+    cap_max : Float
+    cap_min : Float
+    fuel : String
+}

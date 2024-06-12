@@ -5,6 +5,6 @@ public record ResponseFuelDto(
         String name,
         double sale_price,
         double purchase_price,
-        double mesurement
+        double measurement
 ) {
 }

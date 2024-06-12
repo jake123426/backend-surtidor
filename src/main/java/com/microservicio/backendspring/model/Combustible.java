@@ -30,6 +30,6 @@ public class Combustible {
     private double purchase_price;
 
     @NotNull(message = "El campo medición no puede estar vacio")
-    private double mesurement;
+    private double measurement;
 
 }

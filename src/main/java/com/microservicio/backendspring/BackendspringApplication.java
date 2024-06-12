@@ -2,13 +2,10 @@ package com.microservicio.backendspring;
 
 import com.microservicio.backendspring.model.*;
 import com.microservicio.backendspring.repository.*;
-import org.bson.types.ObjectId;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -101,15 +98,15 @@ public class BackendspringApplication {
 
 //*			Agregar Combustibles
 			Combustible gasolina = Combustible.builder().name("Gasolina").sale_price(8.45).purchase_price(5.99)
-					.mesurement(40).build();
+					.measurement(40).build();
 			fuelRepository.save(gasolina);
 
 			Combustible diesel = Combustible.builder().name("Diesel").sale_price(9.15).purchase_price(8.99)
-					.mesurement(60).build();
+					.measurement(60).build();
 			fuelRepository.save(diesel);
 
 			Combustible gasGlp = Combustible.builder().name("Gas GLP").sale_price(6.5).purchase_price(4.99)
-					.mesurement(100).build();
+					.measurement(100).build();
 			fuelRepository.save(gasGlp);
 
 //*			Agregar Tanques

@@ -22,17 +22,17 @@ public class CombustibleService {
         List<ResponseFuelDto> fuelDtos = new ArrayList<>();
         combustibles.forEach(fuel -> {
             ResponseFuelDto responseFuelDto = new ResponseFuelDto(fuel.getId().toString(), fuel.getName(),
-                    fuel.getSale_price(), fuel.getPurchase_price(), fuel.getMesurement());
+                    fuel.getSale_price(), fuel.getPurchase_price(), fuel.getMeasurement());
             fuelDtos.add(responseFuelDto);
         });
         return fuelDtos;
     }
     public ResponseFuelDto createCombustible(CreateFuelDto fuelDto) {
         Combustible combustible = Combustible.builder().name(fuelDto.name()).sale_price(fuelDto.sale_price())
-                .purchase_price(fuelDto.purchase_price()).mesurement(fuelDto.mesurement()).build();
+                .purchase_price(fuelDto.purchase_price()).measurement(fuelDto.measurement()).build();
         Combustible combustibleSave = fuelRepository.save(combustible);
         return new ResponseFuelDto(combustibleSave.getId().toString(), combustibleSave.getName(),
-                combustibleSave.getSale_price(), combustibleSave.getPurchase_price(), combustibleSave.getMesurement());
+                combustibleSave.getSale_price(), combustibleSave.getPurchase_price(), combustibleSave.getMeasurement());
     }
 
 }

@@ -3,8 +3,10 @@ package com.microservicio.backendspring.service;
 
 import com.microservicio.backendspring.dto.CreateUserDto;
 import com.microservicio.backendspring.dto.ResponseUserDto;
+import com.microservicio.backendspring.model.Bomba;
 import com.microservicio.backendspring.model.Roles;
 import com.microservicio.backendspring.model.Usuario;
+import com.microservicio.backendspring.repository.PumpRepository;
 import com.microservicio.backendspring.repository.RoleRepository;
 import com.microservicio.backendspring.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class UsuarioService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private PumpRepository pumpRepository;
+
 
     public ResponseUserDto findUserByEmail(String email) {
         Usuario usuario = usuarioRepository.findUsuarioByEmail(email)
@@ -30,34 +35,41 @@ public class UsuarioService {
         List<String> roles = this.getRoles(usuario);
         List<String> permisos = this.getPermisos(usuario);
         return new ResponseUserDto(usuario.getId().toString(), usuario.getName(),
-                usuario.getPassword(), usuario.getEmail(), roles, permisos);
+                usuario.getPassword(), usuario.getEmail(), null,roles, permisos);
     }
 
     public ResponseUserDto create(CreateUserDto createUserDto) {
-        String name = createUserDto.username();
-        String password = createUserDto.password();
-        String email = createUserDto.email();
+        Bomba bomba = pumpRepository.findBombaByName(createUserDto.bomba()).orElse(null);
         List<String> roles = createUserDto.roles();
         List<Roles> rolesDocument = roleRepository.findAllByNameIn(roles);
 
         Usuario usuario = Usuario.builder()
-                .name(name)
-                .password(password)
-                .email(email)
+                .name(createUserDto.username())
+                .password(createUserDto.password())
+                .email(createUserDto.email())
+                .status(1)
+                .bomba(bomba)
                 .roles(rolesDocument)
                 .build();
         Usuario savedUsuario = usuarioRepository.save(usuario);
         List<String> permisos = this.getPermisos(savedUsuario);
 
         return new ResponseUserDto(savedUsuario.getId().toString(), savedUsuario.getName(),
-                savedUsuario.getPassword(),savedUsuario.getEmail(), roles, permisos);
+                savedUsuario.getPassword(),savedUsuario.getEmail(), bomba != null ? bomba.getName() : null, roles, permisos);
     }
 
-    public List<Usuario> findAll() {
+    public List<ResponseUserDto> findAll() {
         List<Usuario> usuarios = usuarioRepository.findAll();
         List<ResponseUserDto> usuariosDto = new ArrayList<>();
-        return new ArrayList<>();
-//        return usuarioRepository.findAll();
+        usuarios.forEach( usuario -> {
+            List<String> roles = this.getRoles(usuario);
+            List<String> permisos = this.getPermisos(usuario);
+            ResponseUserDto responseUserDto = new ResponseUserDto(usuario.getId().toString(),
+                    usuario.getName(), usuario.getPassword(), usuario.getEmail(),
+                    usuario.getBomba() != null ? usuario.getBomba().getName() : null, roles, permisos);
+            usuariosDto.add(responseUserDto);
+        });
+        return usuariosDto;
     }
 
     private List<String> getRoles(Usuario usuario) {

@@ -1,0 +1,23 @@
+
+type Mutation{
+    saveFuel( fuelDto : CreateFuelDto ): ResponseFuelDto
+}
+
+type Query{
+    getAllFuel: [ResponseFuelDto]
+}
+
+type ResponseFuelDto{
+    id : String,
+    name: String,
+    sale_price : Float,
+    purchase_price : Float,
+    measurement : Float
+}
+
+input CreateFuelDto{
+    name : String,
+    sale_price: Float,
+    purchase_price : Float,
+    measurement : Float
+}

@@ -1,0 +1,23 @@
+
+extend type Mutation{
+    savePump( pumpDto : CreatePumpDto ): ResponsePumpDto
+}
+
+extend type Query {
+    getAllPump: [ResponsePumpDto]
+}
+
+type ResponsePumpDto{
+    id : String,
+    name : String,
+    description : String,
+    fuel_type : String,
+    tank : String
+}
+
+input CreatePumpDto{
+    name : String
+    description : String
+    fuel_type : String
+    tank : String
+}

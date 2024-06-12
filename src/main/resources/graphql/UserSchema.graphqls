@@ -1,0 +1,13 @@
+extend type Query {
+    getAllUser: [ResponseUserDto]
+}
+
+type ResponseUserDto{
+    id : String
+    name : String
+    password : String
+    email : String
+    bomba : String
+    roles : [String]
+    permisos : [String]
+}

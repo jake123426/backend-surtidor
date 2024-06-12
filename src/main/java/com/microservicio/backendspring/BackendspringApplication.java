@@ -128,18 +128,22 @@ public class BackendspringApplication {
 		};
 	}
 
-//	@Bean
-//	public WebMvcConfigurer corsConfigurer() {
-//		return new WebMvcConfigurer() {
-//			@Override
-//			public void addCorsMappings(CorsRegistry registry) {
-//				registry.addMapping("/**")
-//						.allowedOrigins("*")
-//						.allowedMethods("GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS", "HEAD")
-//						.allowedHeaders("Authorization", "Requestor-Type")
-//						.exposedHeaders("X-Get-Header");
-//
-//			}
-//		};
-//	}
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**")
+//						.allowedOrigins("http://localhost:8080", "http://127.0.0.1:8080")
+						.allowedOrigins("*")
+						.allowedMethods("GET", "POST", "OPTIONS")
+						.allowedHeaders("*");
+//						.maxAge(3600)
+//						.allowCredentials(true)
+//						.exposedHeaders("*");
+
+
+			}
+		};
+	}
 }

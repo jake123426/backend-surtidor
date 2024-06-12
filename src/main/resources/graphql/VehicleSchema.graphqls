@@ -14,6 +14,7 @@ type ResponseVehicleDto{
     fuel_type : String,
     number_plate : String,
     path_image : String
+    status : Int
 }
 
 input CreateVehicleDto{
@@ -22,4 +23,5 @@ input CreateVehicleDto{
     fuel_type : String
     number_plate : String
     path_image : String
+    status : Int
 }

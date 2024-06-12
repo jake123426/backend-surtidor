@@ -7,6 +7,7 @@ public record CreateVehicleDto(
        @NotBlank String model,
        @NotBlank String fuel_type,
        @NotBlank String number_plate,
-       @NotBlank String path_image
+       @NotBlank String path_image,
+       @NotBlank int status
 ) {
 }

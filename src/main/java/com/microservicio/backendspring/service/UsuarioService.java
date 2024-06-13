@@ -12,7 +12,9 @@ import com.microservicio.backendspring.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -35,7 +37,7 @@ public class UsuarioService {
         List<String> roles = this.getRoles(usuario);
         List<String> permisos = this.getPermisos(usuario);
         return new ResponseUserDto(usuario.getId().toString(), usuario.getName(),
-                usuario.getPassword(), usuario.getEmail(), null,roles, permisos);
+                usuario.getPassword(), usuario.getEmail(), null,null, roles, permisos);
     }
 
     public ResponseUserDto create(CreateUserDto createUserDto) {
@@ -43,19 +45,24 @@ public class UsuarioService {
         List<String> roles = createUserDto.roles();
         List<Roles> rolesDocument = roleRepository.findAllByNameIn(roles);
 
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate = format.format(date);
+
         Usuario usuario = Usuario.builder()
                 .name(createUserDto.username())
                 .password(createUserDto.password())
                 .email(createUserDto.email())
                 .status(1)
                 .bomba(bomba)
+                .createAt(formattedDate)
                 .roles(rolesDocument)
                 .build();
         Usuario savedUsuario = usuarioRepository.save(usuario);
         List<String> permisos = this.getPermisos(savedUsuario);
 
         return new ResponseUserDto(savedUsuario.getId().toString(), savedUsuario.getName(),
-                savedUsuario.getPassword(),savedUsuario.getEmail(), bomba != null ? bomba.getName() : null, roles, permisos);
+                savedUsuario.getPassword(),savedUsuario.getEmail(), bomba != null ? bomba.getName() : null, savedUsuario.getCreateAt(), roles, permisos);
     }
 
     public List<ResponseUserDto> findAll() {
@@ -66,7 +73,7 @@ public class UsuarioService {
             List<String> permisos = this.getPermisos(usuario);
             ResponseUserDto responseUserDto = new ResponseUserDto(usuario.getId().toString(),
                     usuario.getName(), usuario.getPassword(), usuario.getEmail(),
-                    usuario.getBomba() != null ? usuario.getBomba().getName() : null, roles, permisos);
+                    usuario.getBomba() != null ? usuario.getBomba().getName() : null, usuario.getCreateAt(), roles, permisos);
             usuariosDto.add(responseUserDto);
         });
         return usuariosDto;

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @SpringBootApplication
@@ -63,25 +64,32 @@ public class BackendspringApplication {
 			roleRepository.save(rolesSeller);
 
 //*		    Agregar Usuarios
+			Date date = new Date();
+			SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+			String formattedDate = format.format(date);
+
 			List<String> adminRoles = List.of("ADMIN");
 			Roles adminRol = roleRepository.findByName(adminRoles.getFirst()).orElse(null);
             assert adminRol != null;
             Usuario admin = Usuario.builder().name("jaime").email("jaime@correo.com")
-					.password("$2a$10$XXVAn4IhigiuOOiw6ehmn.44bmJdaB7rwlQK.KLdbEu2RVgxeo2GC").status(1).bomba(null).roles(List.of(adminRol)).build();
+					.password("$2a$10$XXVAn4IhigiuOOiw6ehmn.44bmJdaB7rwlQK.KLdbEu2RVgxeo2GC").status(1)
+					.createAt(formattedDate).bomba(null).roles(List.of(adminRol)).build();
 			usuarioRepository.save(admin);
 
 			List<String> clientRoles = List.of("CLIENT");
 			Roles clientRol = roleRepository.findByName(clientRoles.getFirst()).orElse(null);
 			assert clientRol != null;
 			Usuario client = Usuario.builder().name("rosa").email("rosa@correo.com")
-					.password("$2a$10$XXVAn4IhigiuOOiw6ehmn.44bmJdaB7rwlQK.KLdbEu2RVgxeo2GC").status(1).bomba(null).roles(List.of(clientRol)).build();
+					.password("$2a$10$XXVAn4IhigiuOOiw6ehmn.44bmJdaB7rwlQK.KLdbEu2RVgxeo2GC").status(1)
+					.createAt(formattedDate).bomba(null).roles(List.of(clientRol)).build();
 			usuarioRepository.save(client);
 
 			List<String> sellerRoles = List.of("SELLER");
 			Roles sellerRol = roleRepository.findByName(sellerRoles.getFirst()).orElse(null);
 			assert sellerRol != null;
 			Usuario seller = Usuario.builder().name("carlos").email("carlos@correo.com")
-					.password("$2a$10$XXVAn4IhigiuOOiw6ehmn.44bmJdaB7rwlQK.KLdbEu2RVgxeo2GC").status(1).bomba(null).roles(List.of(sellerRol)).build();
+					.password("$2a$10$XXVAn4IhigiuOOiw6ehmn.44bmJdaB7rwlQK.KLdbEu2RVgxeo2GC").status(1)
+					.createAt(formattedDate).bomba(null).roles(List.of(sellerRol)).build();
 			usuarioRepository.save(seller);
 
 //			Usuario user = usuarioRepository.findAll().getFirst();

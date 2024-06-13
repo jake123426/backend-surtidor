@@ -20,13 +20,13 @@ public class BackendspringApplication {
 
 	@Bean
 	CommandLineRunner commandLineRunner(UsuarioRepository usuarioRepository, RoleRepository roleRepository,
-										PermissionRepository permissionRepository, VehiculoRepository vehiculoRepository,
-										FuelRepository fuelRepository, TankRepository tankRepository, PumpRepository pumpRepository) {
+										PermissionRepository permissionRepository, FuelRepository fuelRepository,
+										TankRepository tankRepository, PumpRepository pumpRepository /*VehiculoRepository vehiculoRepository*/) {
 		return args -> {
 			usuarioRepository.deleteAll();
 			permissionRepository.deleteAll();
 			roleRepository.deleteAll();
-			vehiculoRepository.deleteAll();
+//			vehiculoRepository.deleteAll();
 			fuelRepository.deleteAll();
 			tankRepository.deleteAll();
 			pumpRepository.deleteAll();
@@ -88,13 +88,13 @@ public class BackendspringApplication {
 //			System.out.println(user);
 
 //*			Agregar Vehiculos
-			Vehiculo toyota = Vehiculo.builder().brand("Toyota").model("Vitara").fuel_type("Gasolina")
-					.number_plate("4578-ADC").path_image("image/path").status(1).build();
-			vehiculoRepository.save(toyota);
-
-			Vehiculo suzuki = Vehiculo.builder().brand("Suzuki").model("Jimmy").fuel_type("Diesel")
-					.number_plate("7895-JKA").path_image("image/path").status(1).build();
-			vehiculoRepository.save(suzuki);
+//			Vehiculo toyota = Vehiculo.builder().brand("Toyota").model("Vitara").fuel_type("Gasolina")
+//					.number_plate("4578-ADC").path_image("image/path").status(1).build();
+//			vehiculoRepository.save(toyota);
+//
+//			Vehiculo suzuki = Vehiculo.builder().brand("Suzuki").model("Jimmy").fuel_type("Diesel")
+//					.number_plate("7895-JKA").path_image("image/path").status(1).build();
+//			vehiculoRepository.save(suzuki);
 
 //*			Agregar Combustibles
 			Combustible gasolina = Combustible.builder().name("Gasolina").sale_price(8.45).purchase_price(5.99)

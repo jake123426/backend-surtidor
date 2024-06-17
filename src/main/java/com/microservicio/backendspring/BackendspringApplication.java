@@ -106,15 +106,15 @@ public class BackendspringApplication {
 
 //*			Agregar Combustibles
 			Combustible gasolina = Combustible.builder().name("Gasolina").sale_price(8.45).purchase_price(5.99)
-					.measurement(40).build();
+					.measurement("Lts").build();
 			fuelRepository.save(gasolina);
 
 			Combustible diesel = Combustible.builder().name("Diesel").sale_price(9.15).purchase_price(8.99)
-					.measurement(60).build();
+					.measurement("Gal").build();
 			fuelRepository.save(diesel);
 
 			Combustible gasGlp = Combustible.builder().name("Gas GLP").sale_price(6.5).purchase_price(4.99)
-					.measurement(100).build();
+					.measurement("Gal").build();
 			fuelRepository.save(gasGlp);
 
 //*			Agregar Tanques

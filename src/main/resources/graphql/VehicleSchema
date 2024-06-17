@@ -1,0 +1,27 @@
+
+#extend type Mutation{
+#    saveVehicle( vehicleDto : CreateVehicleDto ): ResponseVehicleDto
+#}
+#
+#extend type Query {
+#    getAllVehicle: [ResponseVehicleDto]
+#}
+#
+#type ResponseVehicleDto{
+#    id : String,
+#    brand : String,
+#    model : String,
+#    fuel_type : String,
+#    number_plate : String,
+#    path_image : String
+#    status : Int
+#}
+#
+#input CreateVehicleDto{
+#    brand : String
+#    model : String
+#    fuel_type : String
+#    number_plate : String
+#    path_image : String
+#    status : Int
+#}

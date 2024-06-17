@@ -7,7 +7,8 @@ type ResponseUserDto{
     name : String
     password : String
     email : String
-    bomba : String
+    pump : String
+    createAt: String
     roles : [String]
     permisos : [String]
 }

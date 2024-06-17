@@ -13,20 +13,20 @@ import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-@Controller
+//@Controller
 public class VehicleController {
 
-    @Autowired
-    private VehiculoService vehiculoService;
-
-    @QueryMapping
-    public List<ResponseVehicleDto> getAllVehicle() {
-        return vehiculoService.findAll();
-    }
-
-    @MutationMapping
-    public ResponseVehicleDto saveVehicle(@Argument CreateVehicleDto vehicleDto) {
-        return  vehiculoService.createVehiculo(vehicleDto);
-    }
+//    @Autowired
+//    private VehiculoService vehiculoService;
+//
+//    @QueryMapping
+//    public List<ResponseVehicleDto> getAllVehicle() {
+//        return vehiculoService.findAll();
+//    }
+//
+//    @MutationMapping
+//    public ResponseVehicleDto saveVehicle(@Argument CreateVehicleDto vehicleDto) {
+//        return  vehiculoService.createVehiculo(vehicleDto);
+//    }
 
 }

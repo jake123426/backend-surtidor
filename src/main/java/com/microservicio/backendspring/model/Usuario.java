@@ -37,6 +37,9 @@ public class Usuario {
     @NotNull(message = "El campo status no puede estar vacio")
     private int status;
 
+    @NotNull(message = "El campo crateAt no puede estar vacio")
+    private String createAt;
+
     @DocumentReference(collection = "pump")
     private Bomba bomba;
 

@@ -26,8 +26,9 @@ public class BombaService {
         List<Bomba> bombas = pumpRepository.findAll();
         List<ResponsePumpDto> pumpDtos = new ArrayList<>();
         bombas.forEach( bomba -> {
-            ResponsePumpDto responsePumpDto = new ResponsePumpDto(bomba.getId().toString(),
-                    bomba.getName(), bomba.getDescription(), bomba.getFuel_type(), bomba.getTanque() != null ? bomba.getTanque().getName() : null);
+            ResponsePumpDto responsePumpDto = new ResponsePumpDto(bomba.getId().toString(), bomba.getName(),
+                    bomba.getDescription(), bomba.getFuel_type(), bomba.getTanque() != null ? bomba.getTanque().getName() : null,
+                    bomba.getStatus());
             pumpDtos.add(responsePumpDto);
         });
         return pumpDtos;
@@ -35,9 +36,9 @@ public class BombaService {
     public ResponsePumpDto createBomba(CreatePumpDto pumpDto){
         Tanque tanque = tankRepository.findTanqueByName(pumpDto.tank()).orElse(null);
         Bomba bomba = Bomba.builder().name(pumpDto.name()).description(pumpDto.description())
-                .fuel_type(pumpDto.fuel_type()).status(1).tanque(tanque).build();
+                .fuel_type(pumpDto.fuel_type()).status(pumpDto.status()).tanque(tanque).build();
         Bomba saveBomba = pumpRepository.save(bomba);
-        return new ResponsePumpDto(saveBomba.getId().toString(), saveBomba.getName(),
-                saveBomba.getDescription(), saveBomba.getFuel_type(), saveBomba.getTanque() != null ? saveBomba.getTanque().getName() : null);
+        return new ResponsePumpDto(saveBomba.getId().toString(), saveBomba.getName(), saveBomba.getDescription(), saveBomba.getFuel_type(),
+                saveBomba.getTanque() != null ? saveBomba.getTanque().getName() : null, saveBomba.getStatus());
     }
 }

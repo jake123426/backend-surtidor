@@ -12,12 +12,12 @@ type ResponseFuelDto{
     name: String,
     sale_price : Float,
     purchase_price : Float,
-    measurement : Float
+    measurement : String
 }
 
 input CreateFuelDto{
     name : String,
     sale_price: Float,
     purchase_price : Float,
-    measurement : Float
+    measurement : String
 }

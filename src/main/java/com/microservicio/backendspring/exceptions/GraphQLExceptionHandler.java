@@ -6,8 +6,8 @@ import graphql.language.SourceLocation;
 import graphql.schema.DataFetchingEnvironment;
 import org.springframework.graphql.execution.DataFetcherExceptionResolverAdapter;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
+
 
 @Component
 public class GraphQLExceptionHandler extends DataFetcherExceptionResolverAdapter {

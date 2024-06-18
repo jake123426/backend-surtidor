@@ -15,6 +15,6 @@ ARG JAR_FILE=target/*.war
 #COPY target/backendspring-0.0.1-SNAPSHOT.war service.war
 COPY ${JAR_FILE} service.war
 
-#EXPOSE 8380
+#EXPOSE 8090
 
 ENTRYPOINT ["java","-jar","service.war"]
